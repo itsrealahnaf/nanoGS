@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | ahnafalsadid.dev</title>
+  <link rel="shortcut icon" href="/ahnafalsadid.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --neon: #00FFB3;
+      --acid: #C8FF00;
+      --void: #080B14;
+      --surface: #0D1120;
+      --panel: #141826;
+      --glass: #1C2235;
+      --muted: #8B92A8;
+      --soft: #C4CAD8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--void);
+      color: var(--soft);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* Grid background */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 255, 179, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 179, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(8, 11, 20, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 255, 179, 0.08);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+    }
+
+    .nav-inner {
+      max-width: 1152px;
+      padding: 8px 24px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo .white { color: #fff; }
+    .logo .dot { color: var(--neon); text-shadow: 0 0 20px rgba(0,255,179,0.6); }
+
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--neon); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    /* Main content */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Giant 404 */
+    .four-oh-four {
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .four-oh-four-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 80;
+      font-size: clamp(120px, 22vw, 220px);
+      line-height: 0.85;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(0, 255, 179, 0.15);
+      letter-spacing: -0.04em;
+      user-select: none;
+      position: relative;
+    }
+
+    /* Glitch layers */
+    .four-oh-four-text::before,
+    .four-oh-four-text::after {
+      content: '404';
+      position: absolute;
+      font-family: 'Syne', sans-serif;
+      font-weight: ;
+      font-size: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+      -webkit-text-stroke: 1px transparent;
+    }
+
+    .four-oh-four-text::before {
+      color: rgba(0, 255, 179, 0.06);
+      animation: glitch-1 4s infinite;
+      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+
+    .four-oh-four-text::after {
+      color: rgba(200, 255, 0, 0.05);
+      animation: glitch-2 4s infinite;
+      clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    }
+
+    @keyframes glitch-1 {
+      0%, 90%, 100% { transform: translateX(0); }
+      92% { transform: translateX(-6px); }
+      94% { transform: translateX(4px); }
+      96% { transform: translateX(-2px); }
+    }
+
+    @keyframes glitch-2 {
+      0%, 90%, 100% { transform: translateX(0); }
+      92% { transform: translateX(6px); }
+      94% { transform: translateX(-4px); }
+      96% { transform: translateX(2px); }
+    }
+
+    /* Center neon overlay on 404 */
+    .four-oh-four-neon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(120px, 22vw, 220px);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: var(--neon);
+      text-shadow: 0 0 40px rgba(0, 255, 179, 0.2), 0 0 80px rgba(0, 255, 179, 0.1);
+      animation: flicker 6s ease-in-out infinite;
+      pointer-events: none;
+      opacity: 0.18;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 0.18; }
+      20%, 24%, 55% { opacity: 0.06; }
+    }
+
+    /* Terminal block */
+    .terminal {
+      background: rgba(20, 24, 38, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 20px 24px;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      width: 100%;
+      max-width: 480px;
+      text-align: left;
+      margin-bottom: 40px;
+      animation: slideUp 0.6s ease 0.3s both;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .dot-red   { width: 12px; height: 12px; border-radius: 50%; background: rgba(239,68,68,0.7); }
+    .dot-yellow{ width: 12px; height: 12px; border-radius: 50%; background: rgba(234,179,8,0.7); }
+    .dot-green { width: 12px; height: 12px; border-radius: 50%; background: rgba(34,197,94,0.7); }
+
+    .terminal-line { line-height: 1.8; }
+    .t-prompt { color: var(--muted); }
+    .t-cmd    { color: var(--soft); }
+    .t-error  { color: #FF6B6B; }
+    .t-neon   { color: var(--neon); }
+    .t-acid   { color: var(--acid); }
+    .t-dim    { color: rgba(139,146,168,0.5); }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--neon);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+      margin-left: 2px;
+    }
+
+    /* Heading */
+    .heading {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      animation: slideUp 0.6s ease 0.1s both;
+    }
+    .heading .neon {
+      color: var(--neon);
+      text-shadow: 0 0 20px rgba(0,255,179,0.5);
+    }
+
+    .subtext {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 380px;
+      margin: 0 auto 36px;
+      animation: slideUp 0.6s ease 0.2s both;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      animation: slideUp 0.6s ease 0.4s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00FFB3, #00D4A0);
+      color: #080B14;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(0, 255, 179, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(0, 255, 179, 0.4);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(0, 255, 179, 0.35);
+      color: var(--neon);
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-outline:hover {
+      background: rgba(0, 255, 179, 0.07);
+      border-color: var(--neon);
+      box-shadow: 0 0 25px rgba(0, 255, 179, 0.12);
+    }
+
+    /* Quick links */
+    .quick-links {
+      margin-top: 52px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      animation: slideUp 0.6s ease 0.5s both;
+    }
+
+    .quick-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 99px;
+      transition: all 0.2s;
+    }
+    .quick-link:hover {
+      color: var(--soft);
+      border-color: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(139,146,168,0.4);
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scanning line */
+    .scan-line {
+      position: fixed;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,255,179,0.15), transparent);
+      animation: scan 8s linear infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes scan {
+      0%   { top: -2px; opacity: 1; }
+      95%  { opacity: 1; }
+      100% { top: 100vh; opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .terminal { font-size: 11px; padding: 16px 18px; }
+      .btn-row { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scanning line -->
+  <div class="scan-line"></div>
+
+  <!-- Ambient orbs -->
+  <div class="orb" style="width:500px;height:500px;background:#00FFB3;opacity:0.025;top:-100px;right:-100px;"></div>
+  <div class="orb" style="width:400px;height:400px;background:#C8FF00;opacity:0.02;bottom:-100px;left:-100px;"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="white">ahnafalsadid</span><span class="dot">.</span><span class="white">dev</span>
+      </a>
+      <a href="index.html" class="nav-back">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M19 12H5M5 12l7-7M5 12l7 7"/>
+        </svg>
+        back to home
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main>
+    <div class="container">
+
+      <!-- Giant 404 -->
+       <br>
+       <br>
+      <div class="four-oh-four">
+        <div class="four-oh-four-neon">404</div>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="heading">
+        Page <span class="neon">not found.</span>
+      </h1>
+
+      <p class="subtext">
+        Looks like this route doesn't exist in the codebase. Maybe it was deleted, moved, or never deployed.
+      </p>
+
+      <!-- Terminal -->
+      <div class="terminal">
+        <div class="terminal-dots">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <div class="terminal-line">
+          <span class="t-prompt">$ </span>
+          <span class="t-cmd">GET /this-page</span>
+        </div>
+        <div class="terminal-line t-error">
+          ✗ &nbsp;404 Not Found — no route matched
+        </div>
+        <div class="terminal-line t-dim" style="margin-top:8px;">
+          &nbsp;&nbsp;at router.resolve (app.js:142)
+        </div>
+        <div class="terminal-line t-dim">
+          &nbsp;&nbsp;at middleware.handle (server.js:89)
+        </div>
+        <div class="terminal-line" style="margin-top:12px;">
+          <span class="t-prompt">$ </span>
+          <span class="t-cmd">cd ~</span>
+        </div>
+        <div class="terminal-line">
+          <span class="t-neon">✓ &nbsp;redirecting to home...</span>
+        </div>
+        <div class="terminal-line" style="margin-top:8px;">
+          <span class="t-prompt">$ </span><span class="cursor"></span>
+        </div>
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="btn-row">
+        <a href="index.html" class="btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M3 12l9-9 9 9M5 10v10h5v-6h4v6h5V10"/>
+          </svg>
+          Go Home
+        </a>
+        <a href="index.html#contact" class="btn-outline">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 7l10 7 10-7"/>
+          </svg>
+          Contact Me
+        </a>
+      </div>
+
+      <!-- Quick links -->
+      <div class="quick-links">
+        <a href="index.html#about"  class="quick-link">About</a>
+        <a href="index.html#skills" class="quick-link">Skills</a>
+        <a href="index.html#nanogs" class="quick-link">NanoGS</a>
+        <a href="index.html#contact" class="quick-link">Contact</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    ahnafalsadid.dev &nbsp;·&nbsp; © 2026
+  </footer>
+
+</body>
+</html>
