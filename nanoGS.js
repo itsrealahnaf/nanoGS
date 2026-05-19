@@ -2,7 +2,7 @@ const nanoGS = {
     init: function () {
         console.log(`
 ╔══════════════════════════════════════╗
-║            nanoGS Initialized        ║
+║          nanoGS Initialized          ║
 ╠══════════════════════════════════════╣
 ║  Lightweight Google Sheets API       ║
 ║  Fast • Simple • Serverless          ║
