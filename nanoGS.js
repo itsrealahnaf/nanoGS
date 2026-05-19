@@ -1,6 +1,19 @@
 const nanoGS = {
     init: function () {
-        console.log("Hurrah!, nanoGS initialized. This script was made by Ahnaf Al Sadid to make simplier connection between your HTML and Google sheets")
+        console.log(`
+╔══════════════════════════════════════╗
+║            nanoGS Initialized        ║
+╠══════════════════════════════════════╣
+║  Lightweight Google Sheets API       ║
+║  Fast • Simple • Serverless          ║
+╠══════════════════════════════════════╣
+║  Status  : Connected                 ║
+║  Version : v1.0.0                    ║
+║  Author  : Ahnaf Al Sadid            ║
+╚══════════════════════════════════════╝
+
+nanoGS is ready to use.
+`);
     },
     searchData: async function (dburl, searchKey, searchValue, returnKey) {
         try {
