@@ -12,7 +12,7 @@ const nanoGS = {
 ║  Author  : Ahnaf Al Sadid            ║
 ╚══════════════════════════════════════╝
 
-nanoGS is ready to use.
+==<nanoGS> nanoGS is ready to use.
 `);
     },
     searchData: async function (dburl, searchKey, searchValue, returnKey) {
